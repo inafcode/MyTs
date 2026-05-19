@@ -22,9 +22,9 @@ function cekAkses(role: string, statusLogin: string) {
     }
 }
 
-const username = "admin";
+const username = "user";
 const password = "12345";
-const role = "admin";
+const role = "user";
 
 const statusLogin = cekLogin(username, password);
 const akses = cekAkses(role, statusLogin);
