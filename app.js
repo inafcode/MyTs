@@ -26,6 +26,19 @@ else {
 let tahunDepan = umur1 + 1;
 console.log(`Tahun depan umur saya : ${tahunDepan}`);
 console.log("=======================================");
+function cekBolehBuatSIM(nama1, umur1, isSudahMenikah) {
+    console.log(`Nama : ${nama1}`);
+    console.log(`Umur : ${umur1}`);
+    console.log(`Sudah Menikah : ${isSudahMenikah}`);
+    if (umur1 >= 17 && !isSudahMenikah) {
+        console.log(`Boleh Membuat SIM`);
+    }
+    else {
+        console.log(`Tidak Boleh Membuat SIM`);
+    }
+}
+cekBolehBuatSIM("Ilham", 24, true);
+console.log("=======================================");
 const name2 = "Naffi";
 let usia = 24;
 let hobi = "Coding";
@@ -53,3 +66,21 @@ else {
     console.log(`${umurUser} belum boleh membuat SIM`);
 }
 console.log(`===========================================`);
+function tampilkanUser(nama, umur) {
+    console.log(`Nama User : ${nama}`);
+    console.log(`Umur User : ${umur}`);
+}
+tampilkanUser("Naufal", 20);
+console.log(`===========================================`);
+function cekBolehBuatSIM(nama1, umur1, isSudahMenikah) {
+    console.log(`Nama : ${nama1}`);
+    console.log(`Umur : ${umur1}`);
+    console.log(`Sudah Menikah : ${isSudahMenikah}`);
+    if (umur1 >= 17 && !isSudahMenikah) {
+        console.log(`Boleh Membuat SIM`);
+    }
+    else {
+        console.log(`Tidak Boleh Membuat SIM`);
+    }
+}
+cekBolehBuatSIM("Ilham", 24, true);

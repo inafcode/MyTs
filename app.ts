@@ -56,10 +56,21 @@ if (punyaKTP) {
     console.log("Belum Punya KTP");
 }
 
+
 if (umurUser >= 17 && punyaKTP) {
     console.log(`${umurUser} sudah boleh membuat SIM`);
 } else {
     console.log(`${umurUser} belum boleh membuat SIM`);
 }
+
+console.log(`===========================================`);
+
+
+function tampilkanUser(nama: string, umur: number) {
+    console.log(`Nama User : ${nama}`)
+    console.log(`Umur User : ${umur}`)
+}
+
+tampilkanUser("Naufal", 20);
 
 console.log(`===========================================`);
