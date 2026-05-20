@@ -16,7 +16,7 @@ function hitungTax(jumlahTransfer) {
         return 10000;
     }
 }
-const saldoAwal = 10000;
+const saldoAwal = 100000;
 const jumlahTransfer = 5000;
 const tax = hitungTax(jumlahTransfer);
 const hasil = transferUang(saldoAwal, jumlahTransfer, tax);
