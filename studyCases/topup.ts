@@ -5,7 +5,7 @@ function hitungBonus(saldoAwal: number, jumlahTopup: number, bonus: number) {
 function hitungBonusTopup(jumlahTopup: number) {
     if (jumlahTopup >= 100000) {
         return 20000;
-    }else if (jumlahTopup > 50000) {
+    }else if (jumlahTopup >= 50000) {
         return 10000;
     }else {
         return 0;
