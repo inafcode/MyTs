@@ -9,7 +9,11 @@ class Barang {
     dapatkanInfo() {
         return `Nama Barang : ${this.nama}, Harga Barang : Rp.${this.harga}`;
     }
+    ubahHarga(hargaBaru) {
+        this.harga = hargaBaru;
+    }
 }
 const barangPertama = new Barang("Laptop", 150000);
+barangPertama.ubahHarga(120000);
 console.log(barangPertama.dapatkanInfo());
-barangPertama.harga = 5000;
+// barangPertama.harga = 5000;

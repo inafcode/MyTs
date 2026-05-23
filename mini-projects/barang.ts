@@ -19,6 +19,7 @@ class Barang {
 
 const barangPertama = new Barang("Laptop", 150000);
 
+barangPertama.ubahHarga(120000);
 console.log(barangPertama.dapatkanInfo()); 
 
 // barangPertama.harga = 5000;
