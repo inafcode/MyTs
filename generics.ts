@@ -20,9 +20,12 @@ class BrankasAset<T> {
 }
 
 const brankasUI = new BrankasAset<DesainUI>();
+const brankasPeta = new BrankasAset<AsetLingkungan>();
 brankasUI.tambahAset({namaPanel: "Menu Utama", resolusi: "1920x1080" });
 brankasUI.tambahAset({namaPanel: "Aset Lingkungan", resolusi: "1920x1080"});
-brankasUI.tambahAset({namaPanel: "Danau", resolusi: "1640x720"});
-brankasUI.tambahAset({namaPanel: "Gunung", resolusi: "720x480"});
 console.log(brankasUI.tampilkanKoleksi());
+console.log("===============================================================");
+brankasPeta.tambahAset({namaObjek: "Pohon", ukuranSkala: "1:100"});
+brankasPeta.tambahAset({namaObjek: "Rumah", ukuranSkala: "1:50"});
+console.log(brankasPeta.tampilkanKoleksi());
 console.log("===============================================================");
