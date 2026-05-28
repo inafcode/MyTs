@@ -29,8 +29,8 @@ function KartuProduk(props: KartuProps) {
 
     // Fungsi baru untuk menangani 2 tugas sekaligus
     function handleKlikBeli() {
-        setJumlahBeli(jumlahBeli + 1); // Tugas 1: Tambah angka lokal di kartu
-        props.onTambah();              // Tugas 2: Lapor ke App (Komandan)!
+        setJumlahBeli(jumlahBeli + 1);
+        props.onTambah();   
     }
 
     return (
@@ -54,55 +54,79 @@ function KartuProduk(props: KartuProps) {
 function App() {
     const [totalGlobal, setTotalGlobal] = useState(0);
     
-    // STATE BARU: Brankas untuk menyimpan teks pencarian
+    // Brankas 1: Teks Pencarian
     const [kataKunci, setKataKunci] = useState(""); 
+    
+    // Brankas 2 (BARU!): Kategori yang sedang aktif
+    const [kategoriAktif, setKategoriAktif] = useState("Semua");
 
     function hitungTotalGlobal() {
         setTotalGlobal(totalGlobal + 1);
     }
 
-    // LOGIKA FILTER: Menyaring produk berdasarkan kata kunci
-    // toLowerCase() digunakan agar pencarian tidak peduli huruf besar/kecil
+    // LOGIKA FILTER GANDA: Lolos teks DAN lolos kategori
     const produkYangDitampilkan = daftarProduk.filter((produk) => {
-        return produk.nama.toLowerCase().includes(kataKunci.toLowerCase());
+        // Cek Teks (Gerbang 1)
+        const lolosTeks = produk.nama.toLowerCase().includes(kataKunci.toLowerCase());
+        
+        // Cek Kategori (Gerbang 2)
+        // Kalau tab "Semua" dipilih, otomatis lolos. Kalau tidak, kategorinya harus sama persis.
+        const lolosKategori = kategoriAktif === "Semua" || produk.kategori === kategoriAktif;
+
+        // Harus lolos dua-duanya! (&& artinya AND)
+        return lolosTeks && lolosKategori;
     });
+
+    // Daftar tombol kategori yang ingin kita buat
+    const daftarTab = ["Semua", "Pakaian", "Aksesori", "Lingkungan", "Desain"];
 
     return (
         <div style={{ padding: "20px", maxWidth: "800px", margin: "0 auto" }}>
             
-            {/* Bagian Navigasi Atas (Header) */}
+            {/* Navigasi Atas */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", borderBottom: "1px solid #333", paddingBottom: "15px" }}>
                 <h2 style={{ margin: 0 }}>CodeMatrixLabs</h2>
-                
                 <div style={{ backgroundColor: "#646cff", padding: "10px 20px", borderRadius: "20px", fontWeight: "bold" }}>
                     🛒 Total Keranjang: {totalGlobal}
                 </div>
             </div>
 
-            {/* BARU: Kolom Pencarian */}
-            <div style={{ marginBottom: "20px", textAlign: "center" }}>
+            {/* Kolom Pencarian */}
+            <div style={{ marginBottom: "15px", textAlign: "center" }}>
                 <input 
                     type="text"
-                    placeholder="🔍 Cari aset digital (contoh: Map, Kemeja)..."
+                    placeholder="🔍 Cari aset digital..."
                     value={kataKunci}
                     onChange={(event) => setKataKunci(event.target.value)}
                     style={{ padding: "10px", width: "100%", maxWidth: "400px", borderRadius: "8px", border: "1px solid #555", backgroundColor: "#222", color: "white" }}
                 />
             </div>
+
+            {/* BARU: Deretan Tombol Kategori */}
+            <div style={{ display: "flex", justifyContent: "center", gap: "10px", marginBottom: "20px" }}>
+                {daftarTab.map((tab) => (
+                    <button 
+                        key={tab}
+                        onClick={() => setKategoriAktif(tab)}
+                        // Logika visual: Jika tombol ini sedang aktif, warnanya biru. Jika tidak, warnanya abu-abu.
+                        style={{ 
+                            backgroundColor: kategoriAktif === tab ? "#646cff" : "#444",
+                            color: "white", padding: "8px 15px", border: "none", borderRadius: "20px", cursor: "pointer"
+                        }}
+                    >
+                        {tab}
+                    </button>
+                ))}
+            </div>
             
+            {/* Area Tampil Kartu */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: "15px", justifyContent: "center" }}>
-                {/* UBAH DI SINI: Kita map() dari hasil filter, BUKAN dari daftarProduk awal */}
                 {produkYangDitampilkan.map((produk) => (
-                    <KartuProduk 
-                        key={produk.id} 
-                        item={produk} 
-                        onTambah={hitungTotalGlobal} 
-                    />
+                    <KartuProduk key={produk.id} item={produk} onTambah={hitungTotalGlobal} />
                 ))}
                 
-                {/* Pesan ramah jika barang tidak ditemukan */}
                 {produkYangDitampilkan.length === 0 && (
-                    <p style={{ color: "gray", marginTop: "20px" }}>Aset yang kamu cari tidak ditemukan...</p>
+                    <p style={{ color: "gray", marginTop: "20px" }}>Aset tidak ditemukan...</p>
                 )}
             </div>
         </div>
